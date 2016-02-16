@@ -50,8 +50,10 @@ class Elevator(Elevator):
             if self._current_floor == floor: break
         else: assert False
 
-from elevator import ElevatorLogic
-e = Elevator(ElevatorLogic())
-e.call(5,DOWN)
-e.select_floor(1)
-e.call(3, DOWN)
+if __name__ == "__main__":
+    from elevator import ElevatorLogic
+    e = Elevator(ElevatorLogic())
+    e.call(5, DOWN)
+    e.select_floor(1)
+    e.call(3, DOWN)
+    e.run_until_stopped()
