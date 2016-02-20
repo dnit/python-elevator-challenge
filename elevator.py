@@ -2,6 +2,7 @@ UP = 1
 DOWN = 2
 FLOOR_COUNT = 6
 
+
 class ElevatorLogic(object):
     """
     An incorrect implementation. Can you make it pass all the tests?
@@ -19,9 +20,9 @@ class ElevatorLogic(object):
     def __init__(self):
         # Feel free to add any instance variables you want.
         self.destination_floor = None
-        self.direction = None
-        self.floors = {UP:set(), DOWN:set()}
+        self.floors = {UP: set(), DOWN: set()}
         self.callbacks = None
+        self.motor_direction = None
 
     def on_called(self, floor, direction):
         """
@@ -33,13 +34,24 @@ class ElevatorLogic(object):
         direction: the direction the caller wants to go, up or down
         """
         if 1 <= floor <= 6:
-            self.floors[direction].add(floor)
-
-            if not self.direction:
-                self.callbacks.motor_direction(direction)
-                self.destination_floor = list(self.floors[direction]).sort()[0]
+            if self.motor_direction:
+                if self.motor_direction == UP and self.callbacks.current_floor < floor:
+                    self.floors[direction].add(floor)
+                    self.destination_floor = \
+                    sorted(self.floors[self.motor_direction], reverse=self.motor_direction - 1)[0]
+                elif self.motor_direction == DOWN and self.callbacks.current_floor > floor:
+                    self.floors[direction].add(floor)
+                    self.destination_floor = \
+                    sorted(self.floors[self.motor_direction], reverse=self.motor_direction - 1)[0]
             else:
-                self.destination_floor = list(self.floors[direction]).sort(reverse=self.callbacks.motor_direction-1)[0]
+                if self.callbacks.current_floor < floor:
+                    self.destination_floor = floor
+                    self.floors[UP].add(floor)
+                elif self.callbacks.current_floor > floor:
+                    self.destination_floor = floor
+                    self.floors[DOWN].add(floor)
+        #print 'ques %s'%self.floors
+                # print 'destination = %s'%self.destination_floor, self.floors
 
     def on_floor_selected(self, floor):
         """
@@ -50,32 +62,63 @@ class ElevatorLogic(object):
         floor: the floor that was requested
         """
         if 1 <= floor <= 6:
-            if self.callbacks.motor_direction -1:
-                if floor > self.callbacks.current_floor:
-                    self.floors[self.callbacks.motor_direction].add(floor)
+            if self.motor_direction:
+                if self.motor_direction == UP and floor > self.callbacks.current_floor:
+                    self.floors[UP].add(floor)
+                    self.destination_floor = sorted(self.floors[UP])[0]
+                elif self.motor_direction == DOWN and floor < self.callbacks.current_floor:
+                    self.floors[DOWN].add(floor)
+                    self.destination_floor = sorted(self.floors[DOWN])[0]
+                    # self.destination_floor = floor
+                else:
+                    if floor > self.callbacks.current_floor:
+                        self.floors[UP].add(floor)
+                    elif floor < self.callbacks.current_floor:
+                        self.floors[DOWN].add(floor)
             else:
-                if floor < self.callbacks.current_floor:
-                    self.floors[self.callbacks.motor_direction].add(floor)
+                if floor > self.callbacks.current_floor:
+                    self.motor_direction = UP
+                    self.floors[UP].add(floor)
+                elif floor < self.callbacks.current_floor:
+                    self.motor_direction = DOWN
+                    self.floors[DOWN].add(floor)
+                self.destination_floor = floor
 
-            self.destination_floor = floor
+        #print 'ques %s'%self.floors
 
     def on_floor_changed(self):
         """
         This lets you know that the elevator has moved one floor up or down.
         You should decide whether or not you want to stop the elevator.
         """
+
         if self.destination_floor == self.callbacks.current_floor:
-            self.floors[self.direction].pop(self.destination_floor)
-            if self.floors[self.direction]:
-                self. destination_floor  = list(self.floors[self.callbacks.motor_direction]).sort(reverse=self.direction-1)[0]
-            elif self.callbacks.motor_direction == UP:
-                self.destination_floor = list(self.floors[DOWN]).sort(reverse=1)[0]
-            elif self.callbacks.motor_direction == DOWN:
-                self.destination_floor = list(self.floors[UP]).sort()[0]
+            #print 'ques %s'%self.floors
+            # print 'flooer = %s'%self.floors[self.motor_direction]
+
+            if self.floors[self.motor_direction]:
+                self.floors[self.motor_direction].remove(self.destination_floor)
+                try:
+                    self.destination_floor = \
+                    sorted(list(self.floors[self.callbacks.motor_direction]), reverse=self.motor_direction - 1)[0]
+                except IndexError:
+                    self.set_direction_and_destination()
+            else:
+                self.set_direction_and_destination()
+
             self.callbacks.motor_direction = None
 
-
-
+    def set_direction_and_destination(self):
+        if self.motor_direction == UP:
+            try:
+                self.destination_floor = sorted(list(self.floors[DOWN]), reverse=1)[0]
+            except:
+                self.motor_direction = None
+        elif self.motor_direction == DOWN:
+            try:
+                self.destination_floor = sorted(list(self.floors[UP]))[0]
+            except:
+                self.motor_direction = None
 
     def on_ready(self):
         """
@@ -83,7 +126,10 @@ class ElevatorLogic(object):
         Maybe passengers have embarked and disembarked. The doors are closed,
         time to actually move, if necessary.
         """
+
         if self.destination_floor > self.callbacks.current_floor:
             self.callbacks.motor_direction = UP
+            self.motor_direction = UP
         elif self.destination_floor < self.callbacks.current_floor:
             self.callbacks.motor_direction = DOWN
+            self.motor_direction = DOWN

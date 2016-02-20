@@ -1,0 +1,1274 @@
+Trying:
+    UP = 1
+Expecting nothing
+ok
+Trying:
+    DOWN = 2
+Expecting nothing
+ok
+Trying:
+    FLOOR_COUNT = 6
+Expecting nothing
+ok
+Trying:
+    class Elevator(object):
+        def call(self, floor, direction):
+            self._logic_delegate.on_called(floor, direction)
+
+        def select_floor(self, floor):
+            self._logic_delegate.on_floor_selected(floor)
+Expecting nothing
+ok
+Trying:
+    class Elevator(Elevator):
+        def __init__(self, logic_delegate, starting_floor=1):
+            self._current_floor = starting_floor
+            print "%s..." % starting_floor,
+            self._motor_direction = None
+            self._logic_delegate = logic_delegate
+            self._logic_delegate.callbacks = self.Callbacks(self)
+
+        class Callbacks(object):
+            def __init__(self, outer):
+                self._outer = outer
+
+            @property
+            def current_floor(self):
+                return self._outer._current_floor
+
+            @property
+            def motor_direction(self):
+                return self._outer._motor_direction
+
+            @motor_direction.setter
+            def motor_direction(self, direction):
+                self._outer._motor_direction = direction
+Expecting nothing
+ok
+Trying:
+    class Elevator(Elevator):
+        def step(self):
+           delta = 0
+           if self._motor_direction == UP: delta = 1
+           elif self._motor_direction == DOWN: delta = -1
+
+           if delta:
+               self._current_floor = self._current_floor + delta
+               print "%s..." % self._current_floor,
+               self._logic_delegate.on_floor_changed()
+           else:
+               self._logic_delegate.on_ready()
+
+           assert self._current_floor >= 1
+           assert self._current_floor <= FLOOR_COUNT
+        
+        def run_until_stopped(self):
+            self.step()
+            while self._motor_direction is not None: self.step()
+        
+        def run_until_floor(self, floor):
+            for i in range(100):
+                self.step()
+                if self._current_floor == floor: break
+            else: assert False
+Expecting nothing
+ok
+Trying:
+    from elevator import ElevatorLogic
+Expecting nothing
+ok
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(5, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3... 4... 5...
+ok
+Trying:
+    e.select_floor(1)
+Expecting nothing
+ok
+Trying:
+    e.call(3, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 3...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 1...
+ok
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(2, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.select_floor(5)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3... 4... 5...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 3... 2...
+ok
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.select_floor(3)
+Expecting nothing
+ok
+Trying:
+    e.select_floor(5)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3...
+ok
+Trying:
+    e.select_floor(2)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 5...
+**********************************************************************
+File "README.md", line 171, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    4... 5...
+Got:
+    2...
+Trying:
+    e.run_until_stopped()  # nothing happens, because e.select_floor(2) was ignored
+Expecting nothing
+**********************************************************************
+File "README.md", line 173, in README.md
+Failed example:
+    e.run_until_stopped()  # nothing happens, because e.select_floor(2) was ignored
+Expected nothing
+Got:
+    3... 4... 5...
+Trying:
+    e.select_floor(2)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 3... 2...
+ok
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(2, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.call(4, UP)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3... 4...
+ok
+Trying:
+    e.select_floor(5)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    5...
+**********************************************************************
+File "README.md", line 192, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    5...
+Got:
+    3... 2...
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 3... 2...
+**********************************************************************
+File "README.md", line 194, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    4... 3... 2...
+Got nothing
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(2, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.call(4, UP)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3... 4...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    3... 2...
+ok
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.select_floor(5)
+Expecting nothing
+ok
+Trying:
+    e.call(5, UP)
+Expecting nothing
+ok
+Trying:
+    e.call(5, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3... 4... 5...
+ok
+Trying:
+    e.select_floor(4)  # ignored
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting nothing
+**********************************************************************
+File "README.md", line 221, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected nothing
+Got:
+    4...
+Trying:
+    e.select_floor(6)  # ignored
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting nothing
+**********************************************************************
+File "README.md", line 226, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected nothing
+Got:
+    5... 6...
+Trying:
+    e.select_floor(6)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    6...
+**********************************************************************
+File "README.md", line 231, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    6...
+Got nothing
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.select_floor(6)
+Expecting nothing
+ok
+Trying:
+    e.run_until_floor(2)  # elevator is not stopped
+Expecting:
+    2...
+ok
+Trying:
+    e.select_floor(3)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()  # stops for above
+Expecting:
+    3...
+ok
+Trying:
+    e.run_until_floor(4)
+Expecting:
+    4...
+ok
+Trying:
+    e.call(5, UP)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()  # stops for above
+Expecting:
+    5...
+ok
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.select_floor(5)
+Expecting nothing
+ok
+Trying:
+    e.run_until_floor(2)
+Expecting:
+    2...
+ok
+Trying:
+    e.call(2, UP)  # missed the boat, come back later
+Expecting nothing
+ok
+Trying:
+    e.step()  # doesn't stop
+Expecting:
+    3...
+ok
+Trying:
+    e.select_floor(3)  # missed the boat, ignored
+Expecting nothing
+ok
+Trying:
+    e.step()  # doesn't stop
+Expecting:
+    4...
+ok
+Trying:
+    e.run_until_stopped()  # service e.select_floor(5)
+Expecting:
+    5...
+**********************************************************************
+File "README.md", line 265, in README.md
+Failed example:
+    e.run_until_stopped()  # service e.select_floor(5)
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1315, in __run
+        compileflags, 1) in test.globs
+      File "<doctest README.md[66]>", line 1, in <module>
+        e.run_until_stopped()  # service e.select_floor(5)
+      File "<doctest README.md[5]>", line 19, in run_until_stopped
+        while self._motor_direction is not None: self.step()
+      File "<doctest README.md[5]>", line 15, in step
+        assert self._current_floor <= FLOOR_COUNT
+    AssertionError
+Trying:
+    e.run_until_stopped()  # service e.call(2, UP)
+Expecting:
+    4... 3... 2...
+**********************************************************************
+File "README.md", line 267, in README.md
+Failed example:
+    e.run_until_stopped()  # service e.call(2, UP)
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1315, in __run
+        compileflags, 1) in test.globs
+      File "<doctest README.md[67]>", line 1, in <module>
+        e.run_until_stopped()  # service e.call(2, UP)
+      File "<doctest README.md[5]>", line 18, in run_until_stopped
+        self.step()
+      File "<doctest README.md[5]>", line 15, in step
+        assert self._current_floor <= FLOOR_COUNT
+    AssertionError
+Trying:
+    import random
+Expecting nothing
+ok
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    try: print '-',  # doctest:+ELLIPSIS
+    finally:
+        for i in range(100000):  
+            r = random.randrange(6)
+            if r == 0: e.call(
+                random.randrange(FLOOR_COUNT) + 1,
+                random.choice((UP, DOWN)))
+            elif r == 1: e.select_floor(random.randrange(FLOOR_COUNT) + 1)
+            else: e.step()
+Expecting:
+    - ...
+**********************************************************************
+File "README.md", line 277, in README.md
+Failed example:
+    try: print '-',  # doctest:+ELLIPSIS
+    finally:
+        for i in range(100000):  
+            r = random.randrange(6)
+            if r == 0: e.call(
+                random.randrange(FLOOR_COUNT) + 1,
+                random.choice((UP, DOWN)))
+            elif r == 1: e.select_floor(random.randrange(FLOOR_COUNT) + 1)
+            else: e.step()
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1315, in __run
+        compileflags, 1) in test.globs
+      File "<doctest README.md[70]>", line 9, in <module>
+        else: e.step()
+      File "<doctest README.md[5]>", line 14, in step
+        assert self._current_floor >= 1
+    AssertionError
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(5, UP)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3... 4... 5...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting nothing
+ok
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(3, UP)
+Expecting nothing
+ok
+Trying:
+    e.call(5, UP)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3...
+**********************************************************************
+File "README.md", line 309, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    2... 3...
+Got:
+    2... 3... 4... 5...
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 5...
+**********************************************************************
+File "README.md", line 311, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    4... 5...
+Got:
+    4... 3...
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(5, UP)
+Expecting nothing
+ok
+Trying:
+    e.call(3, UP)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 5...
+ok
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(3, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.call(5, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3... 4... 5...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 3...
+ok
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(3, UP)
+Expecting nothing
+ok
+Trying:
+    e.call(5, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3...
+**********************************************************************
+File "README.md", line 342, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    2... 3...
+Got:
+    2... 3... 4... 5...
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 5...
+**********************************************************************
+File "README.md", line 344, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    4... 5...
+Got:
+    4... 3...
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(3, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.call(5, UP)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3... 4... 5...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 3...
+ok
+Trying:
+    e = Elevator(ElevatorLogic(), 3)
+Expecting:
+    3...
+ok
+Trying:
+    e.call(2, UP)
+Expecting nothing
+ok
+Trying:
+    e.call(4, UP)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2...
+**********************************************************************
+File "README.md", line 364, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    2...
+Got:
+    4...
+Trying:
+    e.run_until_stopped()
+Expecting:
+    3... 4...
+**********************************************************************
+File "README.md", line 366, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    3... 4...
+Got:
+    3... 2...
+Trying:
+    e = Elevator(ElevatorLogic(), 3)
+Expecting:
+    3...
+ok
+Trying:
+    e.call(4, UP)
+Expecting nothing
+ok
+Trying:
+    e.call(2, UP)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4...
+**********************************************************************
+File "README.md", line 375, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    4...
+Got:
+    2...
+Trying:
+    e.run_until_stopped()
+Expecting:
+    3... 2...
+**********************************************************************
+File "README.md", line 377, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    3... 2...
+Got:
+    3... 4...
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(5, UP)
+Expecting nothing
+ok
+Trying:
+    e.run_until_floor(2)
+Expecting:
+    2...
+ok
+Trying:
+    e.call(3, UP)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    3...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 5...
+ok
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(5, UP)
+Expecting nothing
+ok
+Trying:
+    e.run_until_floor(3)
+Expecting:
+    2... 3...
+ok
+Trying:
+    e.call(3, UP)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 5...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 3...
+**********************************************************************
+File "README.md", line 403, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    4... 3...
+Got nothing
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.select_floor(3)
+Expecting nothing
+ok
+Trying:
+    e.select_floor(5)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 5...
+ok
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.select_floor(5)
+Expecting nothing
+ok
+Trying:
+    e.select_floor(3)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 5...
+ok
+Trying:
+    e = Elevator(ElevatorLogic(), 3)
+Expecting:
+    3...
+ok
+Trying:
+    e.select_floor(2)
+Expecting nothing
+ok
+Trying:
+    e.select_floor(4)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2...
+**********************************************************************
+File "README.md", line 434, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    2...
+Got:
+    4...
+Trying:
+    e.run_until_stopped()
+Expecting nothing
+**********************************************************************
+File "README.md", line 436, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected nothing
+Got:
+    3... 2...
+Trying:
+    e = Elevator(ElevatorLogic(), 3)
+Expecting:
+    3...
+ok
+Trying:
+    e.select_floor(4)
+Expecting nothing
+ok
+Trying:
+    e.select_floor(2)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4...
+**********************************************************************
+File "README.md", line 444, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    4...
+Got:
+    2...
+Trying:
+    e.run_until_stopped()
+Expecting nothing
+**********************************************************************
+File "README.md", line 446, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected nothing
+Got:
+    3... 4...
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(5, UP)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3... 4... 5...
+ok
+Trying:
+    e.select_floor(6)
+Expecting nothing
+ok
+Trying:
+    e.select_floor(4)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    6...
+**********************************************************************
+File "README.md", line 457, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    6...
+Got:
+    4...
+Trying:
+    e.run_until_stopped()
+Expecting nothing
+**********************************************************************
+File "README.md", line 459, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected nothing
+Got:
+    5... 6...
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(5, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3... 4... 5...
+ok
+Trying:
+    e.select_floor(6)
+Expecting nothing
+ok
+Trying:
+    e.select_floor(4)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting nothing
+**********************************************************************
+File "README.md", line 472, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected nothing
+Got:
+    5... 6...
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(5, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.select_floor(5)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3... 4... 5...
+ok
+Trying:
+    e.select_floor(4)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting nothing
+ok
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(3, UP)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3...
+ok
+Trying:
+    e.call(3, UP)
+Expecting nothing
+ok
+Trying:
+    e.call(5, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 5...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting nothing
+ok
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(2, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.call(4, UP)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3... 4...
+ok
+Trying:
+    e.call(5, DOWN)  # It's not too late.
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    5...
+**********************************************************************
+File "README.md", line 509, in README.md
+Failed example:
+    e.run_until_stopped()
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1315, in __run
+        compileflags, 1) in test.globs
+      File "<doctest README.md[176]>", line 1, in <module>
+        e.run_until_stopped()
+      File "<doctest README.md[5]>", line 19, in run_until_stopped
+        while self._motor_direction is not None: self.step()
+      File "<doctest README.md[5]>", line 10, in step
+        self._logic_delegate.on_floor_changed()
+      File "elevator.py", line 94, in on_floor_changed
+        self.floors[self.motor_direction].remove(self.destination_floor)
+    KeyError: 2
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4... 3... 2...
+**********************************************************************
+File "README.md", line 511, in README.md
+Failed example:
+    e.run_until_stopped()
+Exception raised:
+    Traceback (most recent call last):
+      File "/usr/lib/python2.7/doctest.py", line 1315, in __run
+        compileflags, 1) in test.globs
+      File "<doctest README.md[177]>", line 1, in <module>
+        e.run_until_stopped()
+      File "<doctest README.md[5]>", line 19, in run_until_stopped
+        while self._motor_direction is not None: self.step()
+      File "<doctest README.md[5]>", line 14, in step
+        assert self._current_floor >= 1
+    AssertionError
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.select_floor(5)
+Expecting nothing
+ok
+Trying:
+    e.call(5, UP)
+Expecting nothing
+ok
+Trying:
+    e.call(5, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3... 4... 5...
+ok
+Trying:
+    e.select_floor(4)  # ignored
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting nothing
+**********************************************************************
+File "README.md", line 524, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected nothing
+Got:
+    4...
+Trying:
+    e.select_floor(6)  # ignored
+Expecting nothing
+ok
+Trying:
+    e.select_floor(4)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4...
+**********************************************************************
+File "README.md", line 527, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    4...
+Got nothing
+Trying:
+    e.run_until_stopped()
+Expecting nothing
+ok
+Trying:
+    e = Elevator(ElevatorLogic(), 6)
+Expecting:
+    6...
+ok
+Trying:
+    e.select_floor(2)
+Expecting nothing
+ok
+Trying:
+    e.call(2, UP)
+Expecting nothing
+ok
+Trying:
+    e.call(2, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    5... 4... 3... 2...
+ok
+Trying:
+    e.select_floor(3)  # ignored
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting nothing
+**********************************************************************
+File "README.md", line 541, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected nothing
+Got:
+    3...
+Trying:
+    e.select_floor(1)  # ignored
+Expecting nothing
+ok
+Trying:
+    e.select_floor(3)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    3...
+**********************************************************************
+File "README.md", line 544, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    3...
+Got nothing
+Trying:
+    e.run_until_stopped()
+Expecting nothing
+ok
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.select_floor(5)
+Expecting nothing
+ok
+Trying:
+    e.call(5, UP)
+Expecting nothing
+ok
+Trying:
+    e.call(5, DOWN)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3... 4... 5...
+ok
+Trying:
+    e.select_floor(6)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    6...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    5...
+ok
+Trying:
+    e.select_floor(6)  # ignored
+Expecting nothing
+ok
+Trying:
+    e.select_floor(4)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting nothing
+**********************************************************************
+File "README.md", line 566, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected nothing
+Got:
+    5... 6...
+**********************************************************************
+1 items had failures:
+  33 of 212 in README.md
+212 tests in 1 items.
+179 passed and 33 failed.
+***Test Failed*** 33 failures.
