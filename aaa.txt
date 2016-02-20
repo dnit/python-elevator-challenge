@@ -126,12 +126,26 @@ Trying:
     e.run_until_stopped()
 Expecting:
     2... 3... 4... 5...
-ok
+**********************************************************************
+File "README.md", line 151, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    2... 3... 4... 5...
+Got:
+    2...
 Trying:
     e.run_until_stopped()
 Expecting:
     4... 3... 2...
-ok
+**********************************************************************
+File "README.md", line 156, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    4... 3... 2...
+Got:
+    3... 4... 5...
 Trying:
     e = Elevator(ElevatorLogic())
 Expecting:
@@ -189,7 +203,14 @@ Trying:
     e.run_until_stopped()
 Expecting:
     2... 3... 4...
-ok
+**********************************************************************
+File "README.md", line 189, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    2... 3... 4...
+Got:
+    2...
 Trying:
     e.select_floor(5)
 Expecting nothing
@@ -205,7 +226,7 @@ Failed example:
 Expected:
     5...
 Got:
-    3... 2...
+    3... 4...
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -216,7 +237,8 @@ Failed example:
     e.run_until_stopped()
 Expected:
     4... 3... 2...
-Got nothing
+Got:
+    5...
 Trying:
     e = Elevator(ElevatorLogic())
 Expecting:
@@ -234,12 +256,26 @@ Trying:
     e.run_until_stopped()
 Expecting:
     2... 3... 4...
-ok
+**********************************************************************
+File "README.md", line 203, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    2... 3... 4...
+Got:
+    2...
 Trying:
     e.run_until_stopped()
 Expecting:
     3... 2...
-ok
+**********************************************************************
+File "README.md", line 205, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    3... 2...
+Got:
+    3... 4...
 Trying:
     e = Elevator(ElevatorLogic())
 Expecting:
@@ -269,7 +305,13 @@ ok
 Trying:
     e.run_until_stopped()
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 221, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected nothing
+Got:
+    4...
 Trying:
     e.select_floor(6)  # ignored
 Expecting nothing
@@ -283,7 +325,7 @@ Failed example:
     e.run_until_stopped()
 Expected nothing
 Got:
-    6...
+    5...
 Trying:
     e.select_floor(6)
 Expecting nothing
@@ -292,14 +334,7 @@ Trying:
     e.run_until_stopped()
 Expecting:
     6...
-**********************************************************************
-File "README.md", line 231, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    6...
-Got:
-    5...
+ok
 Trying:
     e = Elevator(ElevatorLogic())
 Expecting:
@@ -466,26 +501,12 @@ Trying:
     e.run_until_stopped()
 Expecting:
     2... 3...
-**********************************************************************
-File "README.md", line 309, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    2... 3...
-Got:
-    2... 3... 4... 5...
+ok
 Trying:
     e.run_until_stopped()
 Expecting:
     4... 5...
-**********************************************************************
-File "README.md", line 311, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    4... 5...
-Got:
-    4... 3...
+ok
 Trying:
     e = Elevator(ElevatorLogic())
 Expecting:
@@ -526,12 +547,26 @@ Trying:
     e.run_until_stopped()
 Expecting:
     2... 3... 4... 5...
-ok
+**********************************************************************
+File "README.md", line 331, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    2... 3... 4... 5...
+Got:
+    2... 3...
 Trying:
     e.run_until_stopped()
 Expecting:
     4... 3...
-ok
+**********************************************************************
+File "README.md", line 333, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    4... 3...
+Got:
+    4... 5...
 Trying:
     e = Elevator(ElevatorLogic())
 Expecting:
@@ -549,26 +584,12 @@ Trying:
     e.run_until_stopped()
 Expecting:
     2... 3...
-**********************************************************************
-File "README.md", line 342, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    2... 3...
-Got:
-    2... 3... 4... 5...
+ok
 Trying:
     e.run_until_stopped()
 Expecting:
     4... 5...
-**********************************************************************
-File "README.md", line 344, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    4... 5...
-Got:
-    4... 3...
+ok
 Trying:
     e = Elevator(ElevatorLogic())
 Expecting:
@@ -586,12 +607,26 @@ Trying:
     e.run_until_stopped()
 Expecting:
     2... 3... 4... 5...
-ok
+**********************************************************************
+File "README.md", line 353, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    2... 3... 4... 5...
+Got:
+    2... 3...
 Trying:
     e.run_until_stopped()
 Expecting:
     4... 3...
-ok
+**********************************************************************
+File "README.md", line 355, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    4... 3...
+Got:
+    4... 5...
 Trying:
     e = Elevator(ElevatorLogic(), 3)
 Expecting:
@@ -609,14 +644,7 @@ Trying:
     e.run_until_stopped()
 Expecting:
     2...
-**********************************************************************
-File "README.md", line 364, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    2...
-Got:
-    4...
+ok
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -627,8 +655,7 @@ Failed example:
     e.run_until_stopped()
 Expected:
     3... 4...
-Got:
-    3... 2...
+Got nothing
 Trying:
     e = Elevator(ElevatorLogic(), 3)
 Expecting:
@@ -646,14 +673,7 @@ Trying:
     e.run_until_stopped()
 Expecting:
     4...
-**********************************************************************
-File "README.md", line 375, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    4...
-Got:
-    2...
+ok
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -664,8 +684,7 @@ Failed example:
     e.run_until_stopped()
 Expected:
     3... 2...
-Got:
-    3... 4...
+Got nothing
 Trying:
     e = Elevator(ElevatorLogic())
 Expecting:
@@ -966,7 +985,14 @@ Trying:
     e.run_until_stopped()
 Expecting:
     2... 3... 4...
-ok
+**********************************************************************
+File "README.md", line 506, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    2... 3... 4...
+Got:
+    2...
 Trying:
     e.call(5, DOWN)  # It's not too late.
 Expecting nothing
@@ -979,19 +1005,10 @@ Expecting:
 File "README.md", line 509, in README.md
 Failed example:
     e.run_until_stopped()
-Exception raised:
-    Traceback (most recent call last):
-      File "/usr/lib/python2.7/doctest.py", line 1315, in __run
-        compileflags, 1) in test.globs
-      File "<doctest README.md[176]>", line 1, in <module>
-        e.run_until_stopped()
-      File "<doctest README.md[5]>", line 19, in run_until_stopped
-        while self._motor_direction is not None: self.step()
-      File "<doctest README.md[5]>", line 10, in step
-        self._logic_delegate.on_floor_changed()
-      File "elevator.py", line 102, in on_floor_changed
-        self.floors[self.motor_direction].remove(self.destination_floor)
-    KeyError: 2
+Expected:
+    5...
+Got:
+    3... 4...
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -1000,17 +1017,10 @@ Expecting:
 File "README.md", line 511, in README.md
 Failed example:
     e.run_until_stopped()
-Exception raised:
-    Traceback (most recent call last):
-      File "/usr/lib/python2.7/doctest.py", line 1315, in __run
-        compileflags, 1) in test.globs
-      File "<doctest README.md[177]>", line 1, in <module>
-        e.run_until_stopped()
-      File "<doctest README.md[5]>", line 19, in run_until_stopped
-        while self._motor_direction is not None: self.step()
-      File "<doctest README.md[5]>", line 14, in step
-        assert self._current_floor >= 1
-    AssertionError
+Expected:
+    4... 3... 2...
+Got:
+    5...
 Trying:
     e = Elevator(ElevatorLogic())
 Expecting:
@@ -1040,7 +1050,13 @@ ok
 Trying:
     e.run_until_stopped()
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 524, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected nothing
+Got:
+    4...
 Trying:
     e.select_floor(6)  # ignored
 Expecting nothing
@@ -1060,17 +1076,11 @@ Failed example:
 Expected:
     4...
 Got:
-    6...
+    5...
 Trying:
     e.run_until_stopped()
 Expecting nothing
-**********************************************************************
-File "README.md", line 529, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected nothing
-Got:
-    5...
+ok
 Trying:
     e = Elevator(ElevatorLogic(), 6)
 Expecting:
@@ -1161,12 +1171,24 @@ Trying:
     e.run_until_stopped()
 Expecting:
     6...
-ok
+**********************************************************************
+File "README.md", line 558, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    6...
+Got nothing
 Trying:
     e.run_until_stopped()
 Expecting:
     5...
-ok
+**********************************************************************
+File "README.md", line 560, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    5...
+Got nothing
 Trying:
     e.select_floor(6)  # ignored
 Expecting nothing
@@ -1179,21 +1201,20 @@ Trying:
     e.run_until_stopped()
 Expecting:
     4...
-**********************************************************************
-File "README.md", line 564, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    4...
-Got:
-    6...
+ok
 Trying:
     e.run_until_stopped()
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 566, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected nothing
+Got:
+    5...
 **********************************************************************
 1 items had failures:
-  23 of 212 in README.md
+  29 of 212 in README.md
 212 tests in 1 items.
-189 passed and 23 failed.
-***Test Failed*** 23 failures.
+183 passed and 29 failed.
+***Test Failed*** 29 failures.

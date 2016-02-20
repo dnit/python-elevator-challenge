@@ -45,12 +45,14 @@ class ElevatorLogic(object):
                     sorted(self.floors[self.motor_direction], reverse=self.motor_direction - 1)[0]
             else:
                 if self.callbacks.current_floor < floor:
+                    self.motor_direction = UP
                     self.destination_floor = floor
                     self.floors[UP].add(floor)
                 elif self.callbacks.current_floor > floor:
+                    self.motor_direction = DOWN
                     self.destination_floor = floor
                     self.floors[DOWN].add(floor)
-        #print 'ques %s'%self.floors
+        print 'ques %s  destination = %s  direction =%s'%(self.floors, self.destination_floor, self.motor_direction)
                 # print 'destination = %s'%self.destination_floor, self.floors
 
     def on_floor_selected(self, floor):
@@ -86,7 +88,7 @@ class ElevatorLogic(object):
                     self.floors[DOWN].add(floor)
                 self.destination_floor = floor
 
-        #print 'ques %s'%self.floors
+        print 'ques %s  destination = %s  direction =%s'%(self.floors, self.destination_floor, self.motor_direction)
 
     def on_floor_changed(self):
         """
@@ -95,9 +97,19 @@ class ElevatorLogic(object):
         """
 
         if self.destination_floor == self.callbacks.current_floor:
+            try:
+                self.floors[UP].remove(self.destination_floor)
+            except:
+                try:
+                    self.floors[DOWN].remove(self.destination_floor)
+                except:
+                    pass
             #print 'ques %s'%self.floors
             # print 'flooer = %s'%self.floors[self.motor_direction]
+            self.set_direction_and_destination()
+            self.callbacks.motor_direction = None
 
+        '''
             if self.floors[self.motor_direction]:
                 self.floors[self.motor_direction].remove(self.destination_floor)
                 try:
@@ -107,20 +119,26 @@ class ElevatorLogic(object):
                     self.set_direction_and_destination()
             else:
                 self.set_direction_and_destination()
-
-            self.callbacks.motor_direction = None
+        '''
 
     def set_direction_and_destination(self):
         if self.motor_direction == UP:
             try:
-                self.destination_floor = sorted(list(self.floors[DOWN]), reverse=1)[0]
-            except:
-                self.motor_direction = None
-        elif self.motor_direction == DOWN:
-            try:
                 self.destination_floor = sorted(list(self.floors[UP]))[0]
             except:
-                self.motor_direction = None
+                try:
+                   self.destination_floor = sorted(list(self.floors[DOWN]),reverse=1)[0]
+                   self.motor_direction = DOWN
+                except:
+                    self.motor_direction = None
+        elif self.motor_direction == DOWN:
+            try:
+                self.destination_floor = sorted(list(self.floors[DOWN]),reverse=1)[0]
+            except:
+                try:
+                    self.destination_floor = sorted(list(self.floors[UP]))[0]
+                except:
+                    self.motor_direction = None
 
     def on_ready(self):
         """
