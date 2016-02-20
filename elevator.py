@@ -40,21 +40,20 @@ class ElevatorLogic(object):
                     self.motor_direction = UP
                 elif floor < self.callbacks.current_floor:
                     self.motor_direction = DOWN
-        try:
             if self.motor_direction == UP:
-                try:
-                    self.destination_floor = sorted(list(self.floors[DOWN]), reverse=1)[0]
-                except:
-                    pass
-            else:
                 try:
                     self.destination_floor = sorted(list(self.floors[UP]))[0]
                 except:
-                    pass
-        except:
-            self.motor_direction = None
+                    self.destination_floor = sorted(list(self.floors[DOWN]), reverse=1)[0]
+            else:
+                try:
+                    self.destination_floor = sorted(list(self.floors[DOWN]), reverse=1)[0]
+                except:
+                    self.destination_floor = sorted(list(self.floors[UP]))[0]
+
+
          #
-       #print 'ques %s , direction = %s , destination %s'%(self.floors, self.motor_direction, self.destination_floor)
+        #print 'ques %s , direction = %s , destination %s'%(self.floors, self.motor_direction, self.destination_floor)
                 # print 'destination = %s'%self.destination_floor, self.floors
 
     def on_floor_selected(self, floor):
@@ -67,12 +66,24 @@ class ElevatorLogic(object):
         """
         if 1 <= floor <= 6:
             if self.motor_direction:
-                if self.motor_direction == UP and floor > self.callbacks.current_floor:
-                    self.floors[UP].add(floor)
-                    self.destination_floor = sorted(self.floors[UP])[0]
-                elif self.motor_direction == DOWN and floor < self.callbacks.current_floor:
-                    self.floors[DOWN].add(floor)
-                    self.destination_floor = sorted(self.floors[DOWN])[0]
+                if self.motor_direction == UP:
+                    if floor > self.callbacks.current_floor:
+                        self.floors[UP].add(floor)
+                        self.destination_floor = sorted(list(self.floors[UP]))[0]
+                    else:
+                        try:
+                            self.destination_floor = sorted(list(self.floors[UP]))[0]
+                        except:
+                            self.motor_direction = None
+                elif self.motor_direction == DOWN:
+                    if floor < self.callbacks.current_floor:
+                        self.floors[DOWN].add(floor)
+                        self.destination_floor = sorted(list(self.floors[DOWN]), reverse=1)[0]
+                    else:
+                        try:
+                            self.destination_floor = sorted(list(self.floors[DOWN]),reverse=1)[0]
+                        except:
+                            self.motor_direction=None
                     # self.destination_floor = floor
                 '''  # if person inside lift to be considered instead of ignored
                 else:
@@ -83,14 +94,14 @@ class ElevatorLogic(object):
                 '''
             else:
                 if floor > self.callbacks.current_floor:
-                    #self.motor_direction = UP
+                    self.motor_direction = UP
                     self.floors[UP].add(floor)
                 elif floor < self.callbacks.current_floor:
-                    #self.motor_direction = DOWN
+                    self.motor_direction = DOWN
                     self.floors[DOWN].add(floor)
                 self.destination_floor = floor   #r
 
-       #print 'ques %s , direction = %s , destination %s'%(self.floors, self.motor_direction, self.destination_floor)
+        #print 'ques %s , direction = %s , destination %s'%(self.floors, self.motor_direction, self.destination_floor)
 
     def on_floor_changed(self):
         """
@@ -120,6 +131,7 @@ class ElevatorLogic(object):
                     self.motor_direction = None
 
             self.callbacks.motor_direction = None
+
 
     def set_direction_and_destination(self):
         if self.motor_direction == UP:

@@ -85,7 +85,13 @@ ok
 Trying:
     e.call(5, DOWN)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 115, in README.md
+Failed example:
+    e.call(5, DOWN)
+Expected nothing
+Got:
+    ques {1: set([]), 2: set([5])} , direction = 1 , destination 5
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -98,7 +104,13 @@ ok
 Trying:
     e.call(3, DOWN)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 128, in README.md
+Failed example:
+    e.call(3, DOWN)
+Expected nothing
+Got:
+    ques {1: set([]), 2: set([1, 3])} , direction = 2 , destination 3
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -117,7 +129,13 @@ ok
 Trying:
     e.call(2, DOWN)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 146, in README.md
+Failed example:
+    e.call(2, DOWN)
+Expected nothing
+Got:
+    ques {1: set([]), 2: set([2])} , direction = 1 , destination 2
 Trying:
     e.select_floor(5)
 Expecting nothing
@@ -149,14 +167,7 @@ Trying:
     e.run_until_stopped()
 Expecting:
     2... 3...
-**********************************************************************
-File "README.md", line 165, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    2... 3...
-Got:
-    2... 3... 4... 5...
+ok
 Trying:
     e.select_floor(2)
 Expecting nothing
@@ -165,14 +176,7 @@ Trying:
     e.run_until_stopped()
 Expecting:
     4... 5...
-**********************************************************************
-File "README.md", line 171, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    4... 5...
-Got:
-    4... 3...
+ok
 Trying:
     e.run_until_stopped()  # nothing happens, because e.select_floor(2) was ignored
 Expecting nothing
@@ -185,14 +189,7 @@ Trying:
     e.run_until_stopped()
 Expecting:
     4... 3... 2...
-**********************************************************************
-File "README.md", line 178, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    4... 3... 2...
-Got:
-    2...
+ok
 Trying:
     e = Elevator(ElevatorLogic())
 Expecting:
@@ -201,11 +198,23 @@ ok
 Trying:
     e.call(2, DOWN)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 187, in README.md
+Failed example:
+    e.call(2, DOWN)
+Expected nothing
+Got:
+    ques {1: set([]), 2: set([2])} , direction = 1 , destination 2
 Trying:
     e.call(4, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 188, in README.md
+Failed example:
+    e.call(4, UP)
+Expected nothing
+Got:
+    ques {1: set([4]), 2: set([2])} , direction = 1 , destination 4
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -233,11 +242,23 @@ ok
 Trying:
     e.call(2, DOWN)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 201, in README.md
+Failed example:
+    e.call(2, DOWN)
+Expected nothing
+Got:
+    ques {1: set([]), 2: set([2])} , direction = 1 , destination 2
 Trying:
     e.call(4, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 202, in README.md
+Failed example:
+    e.call(4, UP)
+Expected nothing
+Got:
+    ques {1: set([4]), 2: set([2])} , direction = 1 , destination 4
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -260,11 +281,23 @@ ok
 Trying:
     e.call(5, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 213, in README.md
+Failed example:
+    e.call(5, UP)
+Expected nothing
+Got:
+    ques {1: set([5]), 2: set([])} , direction = 1 , destination 5
 Trying:
     e.call(5, DOWN)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 214, in README.md
+Failed example:
+    e.call(5, DOWN)
+Expected nothing
+Got:
+    ques {1: set([5]), 2: set([5])} , direction = 1 , destination 5
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -339,7 +372,13 @@ ok
 Trying:
     e.call(5, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 248, in README.md
+Failed example:
+    e.call(5, UP)
+Expected nothing
+Got:
+    ques {1: set([5, 6]), 2: set([])} , direction = 1 , destination 5
 Trying:
     e.run_until_stopped()  # stops for above
 Expecting:
@@ -362,7 +401,13 @@ ok
 Trying:
     e.call(2, UP)  # missed the boat, come back later
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 259, in README.md
+Failed example:
+    e.call(2, UP)  # missed the boat, come back later
+Expected nothing
+Got:
+    ques {1: set([2, 5]), 2: set([])} , direction = 1 , destination 2
 Trying:
     e.step()  # doesn't stop
 Expecting:
@@ -465,7 +510,13 @@ ok
 Trying:
     e.call(5, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 297, in README.md
+Failed example:
+    e.call(5, UP)
+Expected nothing
+Got:
+    ques {1: set([5]), 2: set([])} , direction = 1 , destination 5
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -487,11 +538,23 @@ ok
 Trying:
     e.call(3, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 307, in README.md
+Failed example:
+    e.call(3, UP)
+Expected nothing
+Got:
+    ques {1: set([3]), 2: set([])} , direction = 1 , destination 3
 Trying:
     e.call(5, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 308, in README.md
+Failed example:
+    e.call(5, UP)
+Expected nothing
+Got:
+    ques {1: set([3, 5]), 2: set([])} , direction = 1 , destination 3
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -510,11 +573,23 @@ ok
 Trying:
     e.call(5, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 318, in README.md
+Failed example:
+    e.call(5, UP)
+Expected nothing
+Got:
+    ques {1: set([5]), 2: set([])} , direction = 1 , destination 5
 Trying:
     e.call(3, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 319, in README.md
+Failed example:
+    e.call(3, UP)
+Expected nothing
+Got:
+    ques {1: set([3, 5]), 2: set([])} , direction = 1 , destination 3
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -533,11 +608,23 @@ ok
 Trying:
     e.call(3, DOWN)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 329, in README.md
+Failed example:
+    e.call(3, DOWN)
+Expected nothing
+Got:
+    ques {1: set([]), 2: set([3])} , direction = 1 , destination 3
 Trying:
     e.call(5, DOWN)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 330, in README.md
+Failed example:
+    e.call(5, DOWN)
+Expected nothing
+Got:
+    ques {1: set([]), 2: set([3, 5])} , direction = 1 , destination 5
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -556,11 +643,23 @@ ok
 Trying:
     e.call(3, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 340, in README.md
+Failed example:
+    e.call(3, UP)
+Expected nothing
+Got:
+    ques {1: set([3]), 2: set([])} , direction = 1 , destination 3
 Trying:
     e.call(5, DOWN)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 341, in README.md
+Failed example:
+    e.call(5, DOWN)
+Expected nothing
+Got:
+    ques {1: set([3]), 2: set([5])} , direction = 1 , destination 3
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -579,11 +678,23 @@ ok
 Trying:
     e.call(3, DOWN)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 351, in README.md
+Failed example:
+    e.call(3, DOWN)
+Expected nothing
+Got:
+    ques {1: set([]), 2: set([3])} , direction = 1 , destination 3
 Trying:
     e.call(5, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 352, in README.md
+Failed example:
+    e.call(5, UP)
+Expected nothing
+Got:
+    ques {1: set([5]), 2: set([3])} , direction = 1 , destination 5
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -602,35 +713,33 @@ ok
 Trying:
     e.call(2, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 362, in README.md
+Failed example:
+    e.call(2, UP)
+Expected nothing
+Got:
+    ques {1: set([2]), 2: set([])} , direction = 2 , destination 2
 Trying:
     e.call(4, UP)
 Expecting nothing
+**********************************************************************
+File "README.md", line 363, in README.md
+Failed example:
+    e.call(4, UP)
+Expected nothing
+Got:
+    ques {1: set([2, 4]), 2: set([])} , direction = 2 , destination 2
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2...
 ok
 Trying:
     e.run_until_stopped()
 Expecting:
-    2...
-**********************************************************************
-File "README.md", line 364, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    2...
-Got:
-    4...
-Trying:
-    e.run_until_stopped()
-Expecting:
     3... 4...
-**********************************************************************
-File "README.md", line 366, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    3... 4...
-Got:
-    3... 2...
+ok
 Trying:
     e = Elevator(ElevatorLogic(), 3)
 Expecting:
@@ -639,11 +748,23 @@ ok
 Trying:
     e.call(4, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 373, in README.md
+Failed example:
+    e.call(4, UP)
+Expected nothing
+Got:
+    ques {1: set([4]), 2: set([])} , direction = 1 , destination 4
 Trying:
     e.call(2, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 374, in README.md
+Failed example:
+    e.call(2, UP)
+Expected nothing
+Got:
+    ques {1: set([2, 4]), 2: set([])} , direction = 1 , destination 2
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -676,7 +797,13 @@ ok
 Trying:
     e.call(5, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 384, in README.md
+Failed example:
+    e.call(5, UP)
+Expected nothing
+Got:
+    ques {1: set([5]), 2: set([])} , direction = 1 , destination 5
 Trying:
     e.run_until_floor(2)
 Expecting:
@@ -685,7 +812,13 @@ ok
 Trying:
     e.call(3, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 387, in README.md
+Failed example:
+    e.call(3, UP)
+Expected nothing
+Got:
+    ques {1: set([3, 5]), 2: set([])} , direction = 1 , destination 3
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -704,7 +837,13 @@ ok
 Trying:
     e.call(5, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 397, in README.md
+Failed example:
+    e.call(5, UP)
+Expected nothing
+Got:
+    ques {1: set([5]), 2: set([])} , direction = 1 , destination 5
 Trying:
     e.run_until_floor(3)
 Expecting:
@@ -713,7 +852,13 @@ ok
 Trying:
     e.call(3, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 400, in README.md
+Failed example:
+    e.call(3, UP)
+Expected nothing
+Got:
+    ques {1: set([3, 5]), 2: set([])} , direction = 1 , destination 3
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -769,26 +914,12 @@ Trying:
     e.run_until_stopped()
 Expecting:
     2... 3...
-**********************************************************************
-File "README.md", line 412, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    2... 3...
-Got:
-    2... 3... 4... 5...
+ok
 Trying:
     e.run_until_stopped()
 Expecting:
     4... 5...
-**********************************************************************
-File "README.md", line 414, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    4... 5...
-Got:
-    4... 3...
+ok
 Trying:
     e = Elevator(ElevatorLogic())
 Expecting:
@@ -829,24 +960,11 @@ Trying:
     e.run_until_stopped()
 Expecting:
     2...
-**********************************************************************
-File "README.md", line 434, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    2...
-Got:
-    4...
+ok
 Trying:
     e.run_until_stopped()
 Expecting nothing
-**********************************************************************
-File "README.md", line 436, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected nothing
-Got:
-    3... 2...
+ok
 Trying:
     e = Elevator(ElevatorLogic(), 3)
 Expecting:
@@ -864,24 +982,11 @@ Trying:
     e.run_until_stopped()
 Expecting:
     4...
-**********************************************************************
-File "README.md", line 444, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected:
-    4...
-Got:
-    2...
+ok
 Trying:
     e.run_until_stopped()
 Expecting nothing
-**********************************************************************
-File "README.md", line 446, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected nothing
-Got:
-    3... 4...
+ok
 Trying:
     e = Elevator(ElevatorLogic())
 Expecting:
@@ -890,7 +995,13 @@ ok
 Trying:
     e.call(5, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 452, in README.md
+Failed example:
+    e.call(5, UP)
+Expected nothing
+Got:
+    ques {1: set([5]), 2: set([])} , direction = 1 , destination 5
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -908,24 +1019,55 @@ Trying:
     e.run_until_stopped()
 Expecting:
     6...
+ok
+Trying:
+    e.run_until_stopped()
+Expecting nothing
+ok
+Trying:
+    e = Elevator(ElevatorLogic())
+Expecting:
+    1...
+ok
+Trying:
+    e.call(5, DOWN)
+Expecting nothing
 **********************************************************************
-File "README.md", line 457, in README.md
+File "README.md", line 465, in README.md
+Failed example:
+    e.call(5, DOWN)
+Expected nothing
+Got:
+    ques {1: set([]), 2: set([5])} , direction = 1 , destination 5
+Trying:
+    e.run_until_stopped()
+Expecting:
+    2... 3... 4... 5...
+ok
+Trying:
+    e.select_floor(6)
+Expecting nothing
+ok
+Trying:
+    e.select_floor(4)
+Expecting nothing
+ok
+Trying:
+    e.run_until_stopped()
+Expecting:
+    4...
+**********************************************************************
+File "README.md", line 470, in README.md
 Failed example:
     e.run_until_stopped()
 Expected:
+    4...
+Got:
     6...
-Got:
-    4...
 Trying:
     e.run_until_stopped()
 Expecting nothing
-**********************************************************************
-File "README.md", line 459, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected nothing
-Got:
-    5... 6...
+ok
 Trying:
     e = Elevator(ElevatorLogic())
 Expecting:
@@ -934,44 +1076,13 @@ ok
 Trying:
     e.call(5, DOWN)
 Expecting nothing
-ok
-Trying:
-    e.run_until_stopped()
-Expecting:
-    2... 3... 4... 5...
-ok
-Trying:
-    e.select_floor(6)
-Expecting nothing
-ok
-Trying:
-    e.select_floor(4)
-Expecting nothing
-ok
-Trying:
-    e.run_until_stopped()
-Expecting:
-    4...
-ok
-Trying:
-    e.run_until_stopped()
-Expecting nothing
 **********************************************************************
-File "README.md", line 472, in README.md
+File "README.md", line 478, in README.md
 Failed example:
-    e.run_until_stopped()
+    e.call(5, DOWN)
 Expected nothing
 Got:
-    5... 6...
-Trying:
-    e = Elevator(ElevatorLogic())
-Expecting:
-    1...
-ok
-Trying:
-    e.call(5, DOWN)
-Expecting nothing
-ok
+    ques {1: set([]), 2: set([5])} , direction = 1 , destination 5
 Trying:
     e.select_floor(5)
 Expecting nothing
@@ -1008,7 +1119,13 @@ ok
 Trying:
     e.call(3, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 491, in README.md
+Failed example:
+    e.call(3, UP)
+Expected nothing
+Got:
+    ques {1: set([3]), 2: set([])} , direction = 1 , destination 3
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -1017,11 +1134,23 @@ ok
 Trying:
     e.call(3, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 494, in README.md
+Failed example:
+    e.call(3, UP)
+Expected nothing
+Got:
+    ques {1: set([3]), 2: set([])} , direction = None , destination 3
 Trying:
     e.call(5, DOWN)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 495, in README.md
+Failed example:
+    e.call(5, DOWN)
+Expected nothing
+Got:
+    ques {1: set([3]), 2: set([5])} , direction = 1 , destination 3
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -1045,11 +1174,23 @@ ok
 Trying:
     e.call(2, DOWN)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 504, in README.md
+Failed example:
+    e.call(2, DOWN)
+Expected nothing
+Got:
+    ques {1: set([]), 2: set([2])} , direction = 1 , destination 2
 Trying:
     e.call(4, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 505, in README.md
+Failed example:
+    e.call(4, UP)
+Expected nothing
+Got:
+    ques {1: set([4]), 2: set([2])} , direction = 1 , destination 4
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -1058,7 +1199,13 @@ ok
 Trying:
     e.call(5, DOWN)  # It's not too late.
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 508, in README.md
+Failed example:
+    e.call(5, DOWN)  # It's not too late.
+Expected nothing
+Got:
+    ques {1: set([]), 2: set([2, 5])} , direction = 1 , destination 5
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -1081,11 +1228,23 @@ ok
 Trying:
     e.call(5, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 519, in README.md
+Failed example:
+    e.call(5, UP)
+Expected nothing
+Got:
+    ques {1: set([5]), 2: set([])} , direction = 1 , destination 5
 Trying:
     e.call(5, DOWN)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 520, in README.md
+Failed example:
+    e.call(5, DOWN)
+Expected nothing
+Got:
+    ques {1: set([5]), 2: set([5])} , direction = 1 , destination 5
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -1141,11 +1300,23 @@ ok
 Trying:
     e.call(2, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 536, in README.md
+Failed example:
+    e.call(2, UP)
+Expected nothing
+Got:
+    ques {1: set([2]), 2: set([2])} , direction = 2 , destination 2
 Trying:
     e.call(2, DOWN)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 537, in README.md
+Failed example:
+    e.call(2, DOWN)
+Expected nothing
+Got:
+    ques {1: set([2]), 2: set([2])} , direction = 2 , destination 2
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -1177,18 +1348,11 @@ Failed example:
     e.run_until_stopped()
 Expected:
     3...
-Got:
-    1...
+Got nothing
 Trying:
     e.run_until_stopped()
 Expecting nothing
-**********************************************************************
-File "README.md", line 546, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected nothing
-Got:
-    2...
+ok
 Trying:
     e = Elevator(ElevatorLogic())
 Expecting:
@@ -1201,11 +1365,23 @@ ok
 Trying:
     e.call(5, UP)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 553, in README.md
+Failed example:
+    e.call(5, UP)
+Expected nothing
+Got:
+    ques {1: set([5]), 2: set([])} , direction = 1 , destination 5
 Trying:
     e.call(5, DOWN)
 Expecting nothing
-ok
+**********************************************************************
+File "README.md", line 554, in README.md
+Failed example:
+    e.call(5, DOWN)
+Expected nothing
+Got:
+    ques {1: set([5]), 2: set([5])} , direction = 1 , destination 5
 Trying:
     e.run_until_stopped()
 Expecting:
@@ -1237,20 +1413,21 @@ Trying:
     e.run_until_stopped()
 Expecting:
     4...
-ok
+**********************************************************************
+File "README.md", line 564, in README.md
+Failed example:
+    e.run_until_stopped()
+Expected:
+    4...
+Got:
+    6...
 Trying:
     e.run_until_stopped()
 Expecting nothing
-**********************************************************************
-File "README.md", line 566, in README.md
-Failed example:
-    e.run_until_stopped()
-Expected nothing
-Got:
-    5... 6...
+ok
 **********************************************************************
 1 items had failures:
-  30 of 212 in README.md
+  61 of 212 in README.md
 212 tests in 1 items.
-182 passed and 30 failed.
-***Test Failed*** 30 failures.
+151 passed and 61 failed.
+***Test Failed*** 61 failures.
