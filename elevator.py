@@ -70,11 +70,13 @@ class ElevatorLogic(object):
                     self.floors[DOWN].add(floor)
                     self.destination_floor = sorted(self.floors[DOWN])[0]
                     # self.destination_floor = floor
+                '''  # if person inside lift to be considered instead of ignored
                 else:
                     if floor > self.callbacks.current_floor:
                         self.floors[UP].add(floor)
                     elif floor < self.callbacks.current_floor:
                         self.floors[DOWN].add(floor)
+                '''
             else:
                 if floor > self.callbacks.current_floor:
                     self.motor_direction = UP
